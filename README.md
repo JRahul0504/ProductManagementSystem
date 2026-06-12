@@ -27,7 +27,6 @@ The project follows enterprise software development practices with scalability, 
 | Documentation    | Swagger / OpenAPI        |
 | Testing          | xUnit, Moq               |
 | Containerization | Docker                   |
-| CI/CD            | GitHub Actions           |
 
 ---
 
