@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: product-db
+
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "YourStrongPassword@123"
+
+    ports:
+      - "1433:1433"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: product-api
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+
+      ConnectionStrings__Constr: "Server=sqlserver;Database=ProductManagementSystemDB;User Id=sa;Password=YourStrongPassword@123;TrustServerCertificate=True"
+
+      Jwt__Issuer: ProductManagementSystem
+      Jwt__Audience: ProductManagementSystem.Client
+      Jwt__SigningKey: phase-one-development-signing-key-placeholder-change-before-production
+      Jwt__AccessTokenExpirationMinutes: 15
+      Jwt__RefreshTokenExpirationDays: 7
+
+    depends_on:
+      - sqlserver
