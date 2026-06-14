@@ -52,6 +52,7 @@ The project follows enterprise software development practices with scalability, 
 * Pagination
 * Search
 * Sorting
+* SoftDeleting
 
 ## Item Management
 
